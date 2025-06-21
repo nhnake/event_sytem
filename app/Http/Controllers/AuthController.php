@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-    public function register(Request $request)
-{
+ public function register(Request $request){
+
     $fields = $request->validate([
         'name' => 'required|string',
         'email' => 'required|string|email|unique:users,email',
@@ -22,7 +22,7 @@ class AuthController extends Controller
         'name' => $fields['name'],
         'email' => $fields['email'],
         'password' => bcrypt($fields['password']),
-        'role' => $fields['user'],
+        'role' => $fields['role'],
     ]);
 
     $token = $user->createToken('apptoken')->plainTextToken;
@@ -31,10 +31,11 @@ class AuthController extends Controller
         'user' => $user,
         'token' => $token
     ], 201);
-}
+    }
 
     public function login(Request $request)
     {
+
         $fields = $request->validate([
             'email' => 'required|string',
             'password' => 'required|string',
@@ -65,8 +66,8 @@ class AuthController extends Controller
     return Socialite::driver('google')->stateless()->redirect();
 }
 
-    public function handleGoogleCallback()
-    {
+    public function handleGoogleCallback(){
+
     $googleUser = Socialite::driver('google')->stateless()->user();
 
     $user = User::firstOrCreate(
