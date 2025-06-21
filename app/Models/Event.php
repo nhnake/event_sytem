@@ -19,11 +19,15 @@ class Event extends Model
 
     public function participants()
     {
-        return $this->belongsToMany(User::class, 'event_user', 'event_id')
+        return $this->belongsToMany(User::class, 'event_id', "feedback")
                     ->withTimestamps();
     }
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+    public function feedbacks()
+     {
+    return $this->hasMany(Feedbacks::class);
     }
 }
