@@ -23,8 +23,8 @@ class User extends Authenticatable
 
     public function joinedEvents()
     {
-        return $this->belongsToMany(Event::class, 'event_user', 'event_id')
-                ->withTimestamps();
+        return $this->belongsToMany(Event::class, 'feedback', 'event_id')
+                    ->withTimestamps();
     }
 
     public function participants(){
